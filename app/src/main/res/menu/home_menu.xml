@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <item
+        android:id="@+id/filterSpinner"
+        android:title="filter"
+        android:visible="true"
+        app:actionViewClass="android.widget.Spinner"
+        app:showAsAction="always"
+
+        />
+
+    <item
+        android:id="@+id/addMenu"
+        android:title="Add"
+        android:icon="@android:drawable/ic_menu_add"
+        app:showAsAction="always"
+        />
+
+
+</menu>

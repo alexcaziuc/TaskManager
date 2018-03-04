@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="com.example.alex.taskmanager.AddTaskActivity">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Add new task"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/add_task_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="describe your task..."
+        android:inputType="textShortMessage" />
+
+
+        <!-- RadioGroup for visible selection of a priority -->
+
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RadioButton" />
+
+    <EditText
+        android:id="@+id/add_task_priority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="priority ( 1 - 5 )"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/add_task_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="tag"
+        android:inputType="textAutoComplete" />
+
+    <Button
+        android:id="@+id/addNewTaskButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:elevation="5dp"
+        android:text="Add Task"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+</LinearLayout>
