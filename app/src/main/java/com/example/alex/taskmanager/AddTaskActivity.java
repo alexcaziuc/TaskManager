@@ -7,38 +7,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.alex.taskmanager.Utils.TaskDBHelper;
+import com.example.alex.taskmanager.model.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import com.example.alex.taskmanager.Utils.TaskDBHelper;
-import com.example.alex.taskmanager.model.Task;
-
 public class AddTaskActivity extends AppCompatActivity {
+    public RadioGroup myRadioGroup;
+    RadioButton radioButton;
     // Declare a member variable to keep track of a task's selected mPriority
     private int mPriority;
-
     private EditText mNoteEditText;
     private EditText mPriorityEditText;
     private EditText mTagEditText;
     private TextView mDateEditTextView;
-    RadioButton radioButton;
-
-
     private Button mAddBtn;
 
     private TaskDBHelper dbHelper;
+    private RadioButton mySelectedRadioButton;
+    private String mStringPriority;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
+        myRadioGroup = findViewById(R.id.radioGroupID);
         // Initialize to highest mPriority by default (mPriority = 1)
-        radioButton = findViewById(R.id.radioButton);
+        //radioButton = findViewById(R.id.radioButton);
         mPriority = 1;
 
         //init
@@ -67,13 +69,16 @@ public class AddTaskActivity extends AppCompatActivity {
         String date = getCurrentDate();
         dbHelper = new TaskDBHelper(this);
 
-        String radio = radioButton.getText().toString().trim();
+        int checkedRadioId = myRadioGroup.getCheckedRadioButtonId();
 
-        if (radio.isEmpty()) {
-            //error name is empty
-            Toast.makeText(this, "You must enter a radio", Toast.LENGTH_SHORT).show();
-        } else {
-            goBackHome();
+        if (checkedRadioId == R.id.low_radio_btn) {
+            mPriority = 1;
+        } else if (checkedRadioId == R.id.medium_radio_btn) {
+            mPriority = 2;
+        } else if (checkedRadioId == R.id.high_radio_btn) {
+            mPriority = 3;
+        } else if (checkedRadioId == R.id.urgent_radio_btn) {
+            mPriority = 4;
         }
 
         if (note.isEmpty()) {
@@ -104,7 +109,7 @@ public class AddTaskActivity extends AppCompatActivity {
         //create new task
         //Task task = new Task(note, priority, tag);
 
-        Task task = new Task(note, priority, tag, date , radio);
+        Task task = new Task(note, priority, tag, date, mPriority);
         dbHelper.saveNewTaskWithRADIO(task);
 
         //finally redirect back home
@@ -133,6 +138,27 @@ public class AddTaskActivity extends AppCompatActivity {
         return mdformat.format(calendar.getTime());
 
     }
+
+//    public void onRadioButtonClicked(View view) {
+//        // Is the button now checked?
+//        boolean checked = ((RadioButton) view).isChecked();
+//
+//        // Check which radio button was clicked
+//        switch(view.getId()) {
+//            case R.id.low_radio_btn:
+//                if (checked)
+//                    // Pirates are the best
+//                    break;
+//            case R.id.medium_radio_btn:
+//                if (checked)
+//                    // Ninjas rule
+//                    break;
+//            case R.id.high_radio_btn:
+//                if (checked)
+//                    // Ninjas rule
+//                    break;
+//        }
+//    }
 
 
     /**

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,11 +31,46 @@
         <!-- RadioGroup for visible selection of a priority -->
 
 
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/radioGroupID"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RadioButton" />
+        android:checkedButton="@+id/low_radio_btn"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/low_radio_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/radio_low_priority"
+            android:textColor="@color/lowPri" />
+
+        <RadioButton
+            android:id="@+id/medium_radio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/radio_medium_priority"
+            android:textColor="@color/mediumPri" />
+
+        <RadioButton
+            android:id="@+id/high_radio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/radio_high_priority"
+            android:textColor="@color/highPri" />
+
+        <RadioButton
+            android:id="@+id/urgent_radio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/radio_urgent_priority"
+            android:textColor="@color/urgentPri" />
+
+    </RadioGroup>
 
     <EditText
         android:id="@+id/add_task_priority"

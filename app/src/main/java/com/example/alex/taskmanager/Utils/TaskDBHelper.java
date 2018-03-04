@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import com.example.alex.taskmanager.model.Task;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import com.example.alex.taskmanager.model.Task;
 
 /**
  * Created by Ronsoft on 9/16/2017.
@@ -19,7 +19,6 @@ import com.example.alex.taskmanager.model.Task;
 public class TaskDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "task.db";
-    private static final int DATABASE_VERSION = 1 ;
     public static final String TABLE_NAME = "Task";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TASK_NOTE = "note";
@@ -27,7 +26,12 @@ public class TaskDBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TASK_TAG = "tag";
     public static final String COLUMN_TASK_DATE = "date";
     public static final String COLUMN_TASK_RADIO = "radio";
-
+    //possible priority constants
+    public static final int PRIORITY_LOW = 1;
+    public static final int PRIORITY_MEDIUM = 2;
+    public static final int PRIORITY_HIGH = 3;
+    public static final int PRIORITY_URGENT = 4;
+    private static final int DATABASE_VERSION = 1;
 
 
     public TaskDBHelper(Context context) {
@@ -42,7 +46,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
                 COLUMN_TASK_PRIORITY + " INTEGER NOT NULL, " +
                 COLUMN_TASK_TAG + " TEXT NOT NULL, " +
                 COLUMN_TASK_DATE + " DATETIME NOT NULL, " +
-                COLUMN_TASK_RADIO + " TEXT NOT NULL);");
+                COLUMN_TASK_RADIO + " INTEGER NOT NULL);");
 
     }
 
@@ -111,7 +115,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
                 task.setPriority(cursor.getString(cursor.getColumnIndex(COLUMN_TASK_PRIORITY)));
                 task.setTag(cursor.getString(cursor.getColumnIndex(COLUMN_TASK_TAG)));
                 task.setDate(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TASK_DATE)));
-                task.setRadio(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TASK_RADIO)));
+                task.setRadio(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASK_RADIO)));
                 taskLinkedList.add(task);
             } while (cursor.moveToNext());
         }
@@ -134,7 +138,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
             receivedTask.setPriority(cursor.getString(cursor.getColumnIndex(COLUMN_TASK_PRIORITY)));
             receivedTask.setTag(cursor.getString(cursor.getColumnIndex(COLUMN_TASK_TAG)));
             receivedTask.setDate(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TASK_DATE)));
-            receivedTask.setRadio(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TASK_RADIO)));
+            receivedTask.setRadio(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASK_RADIO)));
         }
 
         return receivedTask;

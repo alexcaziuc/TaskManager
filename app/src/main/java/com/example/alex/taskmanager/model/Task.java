@@ -8,7 +8,7 @@ public class Task {
     private String priority;
     private String tag;
     private String date;
-    private String radio;
+    private int radio;
 
     public Task() {
     }
@@ -27,7 +27,7 @@ public class Task {
         this.date = date;
     }
 
-    public Task(String note, String priority, String tag, String date, String radio) {
+    public Task(String note, String priority, String tag, String date, int radio) {
         this.note = note;
         this.priority = priority;
         this.tag = tag;
@@ -75,11 +75,11 @@ public class Task {
         this.date = date;
     }
 
-    public String getRadio() {
+    public int getRadio() {
         return radio;
     }
 
-    public void setRadio(String radio) {
+    public void setRadio(int radio) {
         this.radio = radio;
     }
 }

@@ -5,50 +5,31 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.example.alex.taskmanager.R;
 import com.example.alex.taskmanager.UpdateTaskActivity;
 import com.example.alex.taskmanager.model.Task;
 
+import java.util.List;
+
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
+    int color = 0;
     private List<Task> mTaskList;
     private Context mContext;
     private RecyclerView mRecyclerV;
-    int color = 0;
-
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView taskNoteTxtV;
-        public TextView taskPriorityTxtV;
-        public TextView taskTagTxtV;
-        public TextView taskDateTxtV;
-        public TextView taskRadio;
-
-        public View layout;
 
 
-        public ViewHolder(View v) {
-            super(v);
-            layout = v;
-            taskNoteTxtV = v.findViewById(R.id.single_row_note);
-            taskPriorityTxtV = v.findViewById(R.id.single_row_priority);
-            taskTagTxtV = v.findViewById(R.id.single_row_tag);
-            taskDateTxtV = v.findViewById(R.id.single_row_date);
-            taskRadio = v.findViewById(R.id.single_row_radio);
-
-            //taskPriorityTxtV.setTextColor(getPriorityColor("5"));
-
-        }
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public TaskAdapter(List<Task> myDataset, Context context, RecyclerView recyclerView) {
+        mTaskList = myDataset;
+        mContext = context;
+        mRecyclerV = recyclerView;
     }
 
     public void add(int position, Task task) {
@@ -59,15 +40,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public void remove(int position) {
         mTaskList.remove(position);
         notifyItemRemoved(position);
-    }
-
-
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public TaskAdapter(List<Task> myDataset, Context context, RecyclerView recyclerView) {
-        mTaskList = myDataset;
-        mContext = context;
-        mRecyclerV = recyclerView;
     }
 
     // Create new views (invoked by the layout manager)
@@ -94,9 +66,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.taskTagTxtV.setText("tag: #" + task.getTag());
         // get date
         holder.taskDateTxtV.setText(task.getDate());
-        holder.taskRadio.setText(task.getRadio());
-
-
+        // get selected priority and color as int -> display as String
+        int selectedPriority = task.getRadio();
+        getPriorityAndColor(holder, selectedPriority);
 
         //listen to single view layout click
         holder.layout.setOnClickListener(new View.OnClickListener() {
@@ -146,46 +118,65 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         mContext.startActivity(goToUpdate);
     }
 
-
-
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mTaskList.size();
     }
 
+    // Return the priority with the corresponding color ex low = green, medium = yellow...
+    private void getPriorityAndColor(ViewHolder holder, int priority) {
+
+        switch (priority) {
+            case TaskDBHelper.PRIORITY_LOW:
+                holder.taskRadio.setText(R.string.radio_low_priority);
+                holder.taskRadio.setTextColor(ContextCompat.getColor(mContext, R.color.lowPri));
+                break;
+            case TaskDBHelper.PRIORITY_MEDIUM:
+                holder.taskRadio.setText(R.string.radio_medium_priority);
+                holder.taskRadio.setTextColor(ContextCompat.getColor(mContext, R.color.mediumPri));
+                break;
+            case TaskDBHelper.PRIORITY_HIGH:
+                holder.taskRadio.setText(R.string.radio_high_priority);
+                holder.taskRadio.setTextColor(ContextCompat.getColor(mContext, R.color.highPri));
+                break;
+            case TaskDBHelper.PRIORITY_URGENT:
+                holder.taskRadio.setText(R.string.radio_urgent_priority);
+                holder.taskRadio.setTextColor(ContextCompat.getColor(mContext, R.color.urgentPri));
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView taskNoteTxtV;
+        public TextView taskPriorityTxtV;
+        public TextView taskTagTxtV;
+        public TextView taskDateTxtV;
+        public TextView taskRadio;
+
+        public View layout;
 
 
+        public ViewHolder(View v) {
+            super(v);
+            layout = v;
+            taskNoteTxtV = v.findViewById(R.id.single_row_note);
+            taskPriorityTxtV = v.findViewById(R.id.single_row_priority);
+            taskTagTxtV = v.findViewById(R.id.single_row_tag);
+            taskDateTxtV = v.findViewById(R.id.single_row_date);
+            taskRadio = v.findViewById(R.id.single_row_radio);
 
+            //taskPriorityTxtV.setTextColor(getPriorityColor("5"));
 
+        }
+    }
 
-
-//
-//    private int getPriorityColor(String priority) {
-//        int magnitudeColorResourceId = 0;
-//        int magnitudeFloor = Integer.parseInt(priority);
-//        switch (magnitudeFloor) {
-//            case 0:
-//            case 1:
-//                magnitudeColorResourceId = R.color.magnitude1;
-//                break;
-//            case 2:
-//                magnitudeColorResourceId = R.color.magnitude2;
-//                break;
-//            case 3:
-//                magnitudeColorResourceId = R.color.magnitude3;
-//                break;
-//            case 4:
-//                magnitudeColorResourceId = R.color.magnitude4;
-//                break;
-//            case 5:
-//                magnitudeColorResourceId = R.color.magnitude5;
-//                break;
-//        }
-//
-//        return ContextCompat.getColor(mContext, magnitudeColorResourceId);
-//    }
-//
 
 
 

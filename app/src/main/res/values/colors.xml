@@ -12,18 +12,16 @@
     <color name="materialYellow">#F1C40F</color>
 
     <!-- Color for priority 1 -->
-    <color name="magnitude1">#04b935</color>
-
-    <!-- Color for priority 2  -->
-    <color name="magnitude2">#81ac40</color>
+    <color name="lowPri">#04b935</color>
 
     <!-- Color for priority 3  -->
-    <color name="magnitude3">#d6b201</color>
+    <color name="mediumPri">#d6b201</color>
 
     <!-- Color for priority 4 -->
-    <color name="magnitude4">#e4930e</color>
+    <color name="highPri">#e4930e</color>
 
     <!-- Color for priority 5 -->
-    <color name="magnitude5">#b73827</color>
+    <color name="urgentPri">#b73827</color>
 
+    <color name="newCOLORRRR">#b73827</color>
 </resources>
