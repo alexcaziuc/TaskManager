@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,27 +18,87 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="edit title :"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
     <EditText
         android:id="@+id/update_task_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_margin="10dp"
         android:hint="edit note..."
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/update_task_priority"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="edit priority..."
-        android:inputType="number" />
+        android:layout_marginBottom="10dp"
+        android:text="update priority :"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:checkedButton="@+id/low_radio_btn"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/low_radio_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/radio_low_priority"
+            android:textColor="@color/lowPri"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/medium_radio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/radio_medium_priority"
+            android:textColor="@color/mediumPri"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/high_radio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/radio_high_priority"
+            android:textColor="@color/highPri"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/urgent_radio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/radio_urgent_priority"
+            android:textColor="@color/urgentPri"
+            android:textSize="18sp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="edit tag :"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
     <EditText
         android:id="@+id/update_task_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_margin="10dp"
         android:hint="edit tag..."
         android:inputType="textAutoComplete" />
 
@@ -47,8 +106,9 @@
         android:id="@+id/updateTaskButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/colorAccent"
+        android:elevation="10dp"
         android:text="Update Task"
         android:textAllCaps="false"
         android:textColor="@android:color/white"

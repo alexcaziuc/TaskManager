@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Customize your theme here. -->
-    <color name="colorPrimary">#cc1647a7</color>
-    <color name="colorPrimaryDark">#052048</color>
+    <color name="colorPrimary">#00897b</color>
+    <color name="colorPrimaryDark">#004d40</color>
     <color name="colorAccent">#510001</color>
     <color name="colorPrimaryLight">#C5CAE9</color>
 
-    <!-- colors for task priority selection -->
-    <color name="materialRed">#E74C3C</color>
-    <color name="materialOrange">#E67E22</color>
-    <color name="materialYellow">#F1C40F</color>
-
     <!-- Color for priority 1 -->
-    <color name="lowPri">#04b935</color>
+    <color name="lowPri">#18ab40</color>
 
     <!-- Color for priority 3  -->
     <color name="mediumPri">#d6b201</color>
@@ -23,5 +18,4 @@
     <!-- Color for priority 5 -->
     <color name="urgentPri">#b73827</color>
 
-    <color name="newCOLORRRR">#b73827</color>
 </resources>

@@ -1,38 +1,21 @@
 package com.example.alex.taskmanager.model;
 
-
 public class Task {
 
     private long id;
     private String note;
-    private String priority;
+    private int priority;
     private String tag;
     private String date;
-    private int radio;
 
     public Task() {
     }
 
-    public Task(String note, String priority, String tag) {
-        this.note = note;
-        this.priority = priority;
-        this.tag = tag;
-
-    }
-
-    public Task(String note, String priority, String tag, String date) {
+    public Task(String note, int priority, String tag, String date) {
         this.note = note;
         this.priority = priority;
         this.tag = tag;
         this.date = date;
-    }
-
-    public Task(String note, String priority, String tag, String date, int radio) {
-        this.note = note;
-        this.priority = priority;
-        this.tag = tag;
-        this.date = date;
-        this.radio =radio;
     }
 
     public long getId() {
@@ -51,11 +34,11 @@ public class Task {
         this.note = note;
     }
 
-    public String getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 
@@ -75,11 +58,4 @@ public class Task {
         this.date = date;
     }
 
-    public int getRadio() {
-        return radio;
-    }
-
-    public void setRadio(int radio) {
-        this.radio = radio;
-    }
 }

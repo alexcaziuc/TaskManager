@@ -12,17 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.alex.taskmanager.Utils.TaskAdapter;
 import com.example.alex.taskmanager.Utils.TaskDBHelper;
 
 public class MainActivity extends AppCompatActivity {
-
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -35,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         //initialize the variables
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -44,16 +38,14 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //populate recyclerView
-        populaterecyclerView(filter);
-
+        populateRecyclerView(filter);
 
     }
 
-    private void populaterecyclerView(String filter) {
+    private void populateRecyclerView(String filter) {
         dbHelper = new TaskDBHelper(this);
         adapter = new TaskAdapter(dbHelper.taskList(filter), this, mRecyclerView);
         mRecyclerView.setAdapter(adapter);
-
     }
 
     @Override
@@ -73,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String filter = parent.getSelectedItem().toString();
-                populaterecyclerView(filter);
+                populateRecyclerView(filter);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                populaterecyclerView(filter);
+                populateRecyclerView(filter);
             }
         });
 

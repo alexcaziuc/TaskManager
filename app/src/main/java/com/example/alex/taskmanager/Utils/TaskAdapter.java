@@ -1,6 +1,5 @@
 package com.example.alex.taskmanager.Utils;
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alex.taskmanager.R;
 import com.example.alex.taskmanager.UpdateTaskActivity;
@@ -19,7 +19,6 @@ import com.example.alex.taskmanager.model.Task;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
-    int color = 0;
     private List<Task> mTaskList;
     private Context mContext;
     private RecyclerView mRecyclerV;
@@ -57,17 +56,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-
         final Task task = mTaskList.get(position);
-        holder.taskNoteTxtV.setText("note: " + task.getNote());
-        holder.taskPriorityTxtV.setText("priority: " + task.getPriority());
-        holder.taskTagTxtV.setText("tag: #" + task.getTag());
+
+        holder.taskNoteTxtV.setText(task.getNote());
+        holder.taskTagTxtV.setText(task.getTag());
         // get date
         holder.taskDateTxtV.setText(task.getDate());
         // get selected priority and color as int -> display as String
-        int selectedPriority = task.getRadio();
+        int selectedPriority = task.getPriority();
         getPriorityAndColor(holder, selectedPriority);
 
         //listen to single view layout click
@@ -81,7 +80,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                    //go to update activity
+                        //go to update activity
                         goToUpdateActivity(task.getId());
 
                     }
@@ -95,6 +94,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                         mTaskList.remove(position);
                         mRecyclerV.removeViewAt(position);
                         notifyItemRemoved(position);
+                        Toast.makeText(mContext, "1 item removed", Toast.LENGTH_SHORT).show();
                         notifyItemRangeChanged(position, mTaskList.size());
                         notifyDataSetChanged();
                     }
@@ -108,11 +108,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 builder.create().show();
             }
         });
-
-
     }
 
-    private void goToUpdateActivity(long personId){
+    private void goToUpdateActivity(long personId) {
         Intent goToUpdate = new Intent(mContext, UpdateTaskActivity.class);
         goToUpdate.putExtra("USER_ID", personId);
         mContext.startActivity(goToUpdate);
@@ -129,20 +127,20 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         switch (priority) {
             case TaskDBHelper.PRIORITY_LOW:
-                holder.taskRadio.setText(R.string.radio_low_priority);
-                holder.taskRadio.setTextColor(ContextCompat.getColor(mContext, R.color.lowPri));
+                holder.taskPriorityTxtV.setText(R.string.radio_low_priority);
+                holder.taskPriorityTxtV.setTextColor(ContextCompat.getColor(mContext, R.color.lowPri));
                 break;
             case TaskDBHelper.PRIORITY_MEDIUM:
-                holder.taskRadio.setText(R.string.radio_medium_priority);
-                holder.taskRadio.setTextColor(ContextCompat.getColor(mContext, R.color.mediumPri));
+                holder.taskPriorityTxtV.setText(R.string.radio_medium_priority);
+                holder.taskPriorityTxtV.setTextColor(ContextCompat.getColor(mContext, R.color.mediumPri));
                 break;
             case TaskDBHelper.PRIORITY_HIGH:
-                holder.taskRadio.setText(R.string.radio_high_priority);
-                holder.taskRadio.setTextColor(ContextCompat.getColor(mContext, R.color.highPri));
+                holder.taskPriorityTxtV.setText(R.string.radio_high_priority);
+                holder.taskPriorityTxtV.setTextColor(ContextCompat.getColor(mContext, R.color.highPri));
                 break;
             case TaskDBHelper.PRIORITY_URGENT:
-                holder.taskRadio.setText(R.string.radio_urgent_priority);
-                holder.taskRadio.setTextColor(ContextCompat.getColor(mContext, R.color.urgentPri));
+                holder.taskPriorityTxtV.setText(R.string.radio_urgent_priority);
+                holder.taskPriorityTxtV.setTextColor(ContextCompat.getColor(mContext, R.color.urgentPri));
                 break;
             default:
                 break;
@@ -150,36 +148,23 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public TextView taskNoteTxtV;
         public TextView taskPriorityTxtV;
         public TextView taskTagTxtV;
         public TextView taskDateTxtV;
-        public TextView taskRadio;
 
         public View layout;
-
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
             taskNoteTxtV = v.findViewById(R.id.single_row_note);
-            taskPriorityTxtV = v.findViewById(R.id.single_row_priority);
             taskTagTxtV = v.findViewById(R.id.single_row_tag);
             taskDateTxtV = v.findViewById(R.id.single_row_date);
-            taskRadio = v.findViewById(R.id.single_row_radio);
-
-            //taskPriorityTxtV.setTextColor(getPriorityColor("5"));
-
+            taskPriorityTxtV = v.findViewById(R.id.single_row_priority);
         }
     }
-
-
-
-
 
 
 }

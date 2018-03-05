@@ -3,28 +3,30 @@ package com.example.alex.taskmanager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.alex.taskmanager.Utils.TaskDBHelper;
+import com.example.alex.taskmanager.model.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import com.example.alex.taskmanager.Utils.TaskDBHelper;
-import com.example.alex.taskmanager.model.Task;
-
 public class UpdateTaskActivity extends AppCompatActivity {
 
+    public RadioGroup myRadioGroup;
+    // Declare a member variable to keep track of a task's selected mPriority
+    private int mPriority;
     private EditText mNoteEditText;
-    private EditText mPriorityEditText;
     private EditText mTagEditText;
     private TextView mDateTextView;
-
     private Button mUpdateBtn;
-
     private TaskDBHelper dbHelper;
     private long receivedTaskId;
 
@@ -35,10 +37,10 @@ public class UpdateTaskActivity extends AppCompatActivity {
 
         //init
         mNoteEditText = findViewById(R.id.update_task_note);
-        mPriorityEditText = findViewById(R.id.update_task_priority);
         mTagEditText = findViewById(R.id.update_task_tag);
         mUpdateBtn = findViewById(R.id.updateTaskButton);
         mDateTextView = findViewById(R.id.single_row_date);
+        myRadioGroup = findViewById(R.id.radioGroupID);
 
         dbHelper = new TaskDBHelper(this);
 
@@ -49,14 +51,27 @@ public class UpdateTaskActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        /***populate user data before update***/
+        //populate user data before update
         Task queriedTask = dbHelper.getTask(receivedTaskId);
         //set field to this user data
         mNoteEditText.setText(queriedTask.getNote());
-        mPriorityEditText.setText(queriedTask.getPriority());
         mTagEditText.setText(queriedTask.getTag());
-
-
+        //get priority from selected id and set radio button
+        int receivedPriority = queriedTask.getPriority();
+        switch (receivedPriority) {
+            case TaskDBHelper.PRIORITY_LOW:
+                myRadioGroup.check(R.id.low_radio_btn);
+                break;
+            case TaskDBHelper.PRIORITY_MEDIUM:
+                myRadioGroup.check(R.id.medium_radio_btn);
+                break;
+            case TaskDBHelper.PRIORITY_HIGH:
+                myRadioGroup.check(R.id.high_radio_btn);
+                break;
+            case TaskDBHelper.PRIORITY_URGENT:
+                myRadioGroup.check(R.id.urgent_radio_btn);
+                break;
+        }
 
         //listen to add button click to update
         mUpdateBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,61 +82,50 @@ public class UpdateTaskActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-    private void updateTask(){
+    private void updateTask() {
         String note = mNoteEditText.getText().toString().trim();
-        String priority = mPriorityEditText.getText().toString().trim();
+
         String tag = mTagEditText.getText().toString().trim();
         String date = getCurrentDate();
 
-        if(note.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "You must enter a note", Toast.LENGTH_SHORT).show();
-        } else  {
-            //finally redirect back home
-            goBackHome();
+        int checkedRadioId = myRadioGroup.getCheckedRadioButtonId();
+
+        if (checkedRadioId == R.id.low_radio_btn) {
+            mPriority = 1;
+        } else if (checkedRadioId == R.id.medium_radio_btn) {
+            mPriority = 2;
+        } else if (checkedRadioId == R.id.high_radio_btn) {
+            mPriority = 3;
+        } else if (checkedRadioId == R.id.urgent_radio_btn) {
+            mPriority = 4;
         }
 
-        if(priority.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "You must enter an priority", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(note)) {
+            Toast.makeText(this, "You must enter a task", Toast.LENGTH_SHORT).show();
+            return;
         } else {
-            //finally redirect back home
-            goBackHome();
-        }
-
-        if(tag.isEmpty()){
-            //error name is empty
-            Toast.makeText(this, "You must enter an tag", Toast.LENGTH_SHORT).show();
-        } else {
-            //finally redirect back home
             goBackHome();
         }
 
         //create updated person
-        Task updatedTask = new Task(note, priority, tag, date);
+        Task updatedTask = new Task(note, mPriority, tag, date);
 
         //call dbhelper update
         dbHelper.updateTaskRecord(receivedTaskId, this, updatedTask);
-
-
+        toastMessage("item updated");
     }
 
-    private void goBackHome(){
+    private void goBackHome() {
         startActivity(new Intent(this, MainActivity.class));
     }
-
 
 
     // customizable toast
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
     }
-
-
 
     private String getCurrentDate() {
 
