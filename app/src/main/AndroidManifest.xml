@@ -22,9 +22,11 @@
 
         <activity
             android:name=".AddTaskActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".UpdateTaskActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

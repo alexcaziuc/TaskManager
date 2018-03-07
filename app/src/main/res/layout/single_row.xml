@@ -37,7 +37,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="note : "
+                        android:text="note: "
                         android:textSize="18sp"
                         android:textStyle="italic" />
 
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="priority : "
+                        android:text="priority: "
                         android:textSize="18sp"
                         android:textStyle="italic" />
 
@@ -88,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="tag : #"
+                        android:text="tag: #"
                         android:textSize="18sp"
                         android:textStyle="italic" />
 
@@ -106,21 +106,24 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="0"
-                android:gravity="bottom|right|end"
+                android:layout_weight="18"
+                android:gravity="bottom|center_vertical"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/single_row_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="0"
                     android:maxLines="2"
-                    android:text="created at"
-                    android:textAlignment="center"
+                    android:text="LLL dd, yyyy HH:mm"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/colorAccent"
+                    android:textSize="15sp"
                     android:textStyle="italic" />
             </LinearLayout>
 

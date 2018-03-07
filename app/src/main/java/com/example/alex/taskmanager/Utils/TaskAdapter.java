@@ -92,10 +92,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                         dbHelper.deleteTaskRecord(task.getId(), mContext);
 
                         mTaskList.remove(position);
-                        mRecyclerV.removeViewAt(position);
+//                        mRecyclerV.removeViewAt(position);
                         notifyItemRemoved(position);
                         Toast.makeText(mContext, "1 item removed", Toast.LENGTH_SHORT).show();
-                        notifyItemRangeChanged(position, mTaskList.size());
+//                        notifyItemRangeChanged(position, mTaskList.size());
                         notifyDataSetChanged();
                     }
                 });

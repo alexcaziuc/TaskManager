@@ -73,14 +73,19 @@ public class TaskDBHelper extends SQLiteOpenHelper {
      **/
     public List<Task> taskList(String filter) {
         String query;
-        if (filter.equals("")) {
-            //regular query
-            query = "SELECT  * FROM " + TABLE_NAME;
-        } else if (filter.equals("Date") || filter.equals("Priority")) {
-            query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + filter + " DESC ";
-        } else {
-            //filter results by filter option provided
-            query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + filter;
+        switch (filter) {
+            case "":
+                //regular query
+                query = "SELECT  * FROM " + TABLE_NAME;
+                break;
+            case "Date":
+            case "Priority":
+                query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + filter + " DESC ";
+                break;
+            default:
+                //filter results by filter option provided
+                query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + filter;
+                break;
         }
 
         List<Task> taskLinkedList = new LinkedList<>();
