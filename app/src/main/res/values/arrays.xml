@@ -2,7 +2,6 @@
 <resources>
 
     <string-array name="filterOptions">
-        <item></item>
         <item>Note</item>
         <item>Priority</item>
         <item>Tag</item>
