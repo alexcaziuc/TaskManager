@@ -23,8 +23,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private Context mContext;
     private RecyclerView mRecyclerV;
 
-
-    // Provide a suitable constructor (depends on the kind of dataset)
+    //constructor
     public TaskAdapter(List<Task> myDataset, Context context, RecyclerView recyclerView) {
         mTaskList = myDataset;
         mContext = context;
@@ -56,8 +55,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-
-        // - get element from your dataset at this position
+        // - get element from db at this position
         // - replace the contents of the view with that element
         final Task task = mTaskList.get(position);
 
@@ -92,11 +90,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                         dbHelper.deleteTaskRecord(task.getId(), mContext);
 
                         mTaskList.remove(position);
-//                        mRecyclerV.removeViewAt(position);
                         notifyItemRemoved(position);
                         Toast.makeText(mContext, "1 item removed", Toast.LENGTH_SHORT).show();
-//                        notifyItemRangeChanged(position, mTaskList.size());
-                        notifyDataSetChanged();
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -153,6 +148,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         public TextView taskPriorityTxtV;
         public TextView taskTagTxtV;
         public TextView taskDateTxtV;
+        public TextView mEmptyStateTextView;
 
         public View layout;
 
@@ -163,8 +159,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             taskTagTxtV = v.findViewById(R.id.single_row_tag);
             taskDateTxtV = v.findViewById(R.id.single_row_date);
             taskPriorityTxtV = v.findViewById(R.id.single_row_priority);
+            mEmptyStateTextView = v.findViewById(R.id.empty_view);
         }
     }
-
-
 }

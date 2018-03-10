@@ -2,11 +2,11 @@ package com.example.alex.taskmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.alex.taskmanager.Utils.TaskAdapter;
 import com.example.alex.taskmanager.Utils.TaskDBHelper;
@@ -24,13 +25,21 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private TaskDBHelper dbHelper;
     private TaskAdapter adapter;
-    @Nullable
     private String filter = "";
+    private TextView mEmptyStateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //empty state tv
+        mEmptyStateTextView = findViewById(R.id.empty_view);
+
+        //toolbar
+        Toolbar mainActToobar = findViewById(R.id.act_main_toolbar);
+        setSupportActionBar(mainActToobar);
+        getSupportActionBar().setTitle("Task Manager");
+        getSupportActionBar().setIcon(getDrawable(R.drawable.ic_action_logo));
 
         //initialize the variables
         mRecyclerView = findViewById(R.id.recyclerView);
@@ -41,13 +50,25 @@ public class MainActivity extends AppCompatActivity {
 
         //populate recyclerView
         populateRecyclerView(filter);
-
+        adapter.notifyDataSetChanged();
     }
 
     private void populateRecyclerView(String filter) {
         dbHelper = new TaskDBHelper(this);
-        adapter = new TaskAdapter(dbHelper.taskList(filter), this, mRecyclerView);
-        mRecyclerView.setAdapter(adapter);
+
+        if (dbHelper.taskList(filter).isEmpty()) {
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyStateTextView.setVisibility(View.VISIBLE);
+            adapter = new TaskAdapter(dbHelper.taskList(filter), this, mRecyclerView);
+            mRecyclerView.setAdapter(adapter);
+
+        } else {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmptyStateTextView.setVisibility(View.GONE);
+            adapter = new TaskAdapter(dbHelper.taskList(filter), this, mRecyclerView);
+            mRecyclerView.setAdapter(adapter);
+        }
+
     }
 
     @Override
@@ -59,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
 
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.filterOptions, android.R.layout.simple_spinner_item);
+                R.array.filterOptions, R.layout.custom_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
@@ -103,6 +124,5 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         adapter.notifyDataSetChanged();
     }
-
 
 }

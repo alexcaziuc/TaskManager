@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import com.example.alex.taskmanager.model.Task;
 
@@ -137,8 +136,6 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE _id='" + id + "'");
-        Toast.makeText(context, "Deleted successfully.", Toast.LENGTH_SHORT).show();
-
     }
 
     /**
@@ -151,7 +148,5 @@ public class TaskDBHelper extends SQLiteOpenHelper {
                 "', tag ='" + updatedTask.getTag() + "', date ='" + updatedTask.getDate() +
 
                 "'  WHERE _id='" + personId + "'");
-
-        Toast.makeText(context, "Updated successfully.", Toast.LENGTH_SHORT).show();
     }
 }

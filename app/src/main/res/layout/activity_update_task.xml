@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:scrollbarSize="7dp"
-    android:scrollbarThumbHorizontal="@color/colorAccent"
+    android:scrollbarThumbVertical="@color/colorAccent"
     android:scrollbars="vertical">
 
     <LinearLayout

@@ -18,12 +18,12 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class AddTaskActivity extends AppCompatActivity {
+
     public RadioGroup myRadioGroup;
     // Declare a member variable to keep track of a task's selected mPriority
     private int mPriority;
     private EditText mNoteEditText;
     private EditText mTagEditText;
-
     private Button mAddBtn;
     private TaskDBHelper dbHelper;
 

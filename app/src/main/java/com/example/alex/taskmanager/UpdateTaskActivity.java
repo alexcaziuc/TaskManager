@@ -51,7 +51,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //populate user data before update
+        //populate user data with old values before update
         Task queriedTask = dbHelper.getTask(receivedTaskId);
         //set field to this user data
         mNoteEditText.setText(queriedTask.getNote());
@@ -121,19 +121,16 @@ public class UpdateTaskActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
-
-    // customizable toast
-    private void toastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
     private String getCurrentDate() {
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("LLL dd, yyyy HH:mm", Locale.getDefault());
 
         return mdformat.format(calendar.getTime());
-
     }
 
+    // customizable toast
+    private void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 }

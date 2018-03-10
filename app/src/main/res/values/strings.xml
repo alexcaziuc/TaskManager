@@ -2,27 +2,18 @@
     <string name="app_name">Task Manager</string>
     <string name="action_settings">Settings</string>
 
-
     <string name="add_task_activity_name">Add a New Task</string>
-
-    <!-- Strings for MainActivity -->
-    <string name="priority_1">1</string>
-    <string name="priority_2">2</string>
-    <string name="priority_3">3</string>
 
     <!-- Strings for AddTaskActivity -->
     <!-- This edit task has a unicode character for "..." = "&#8230;" -->
     <string name="edit_task_description">Describe your task&#8230;</string>
     <string name="priority_string">Priority</string>
 
-
     <string name="add_button">Add</string>
     <string name="radio_low_priority">low</string>
     <string name="radio_medium_priority">medium</string>
     <string name="radio_high_priority">high</string>
     <string name="radio_urgent_priority">urgent</string>
-
-
-
+    <string name="no_data_available">No data available. Use + sign to add a new task and the drop down menu as filter.</string>
 
 </resources>
