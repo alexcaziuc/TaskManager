@@ -30,16 +30,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         mRecyclerV = recyclerView;
     }
 
-    public void add(int position, Task task) {
-        mTaskList.add(position, task);
-        notifyItemInserted(position);
-    }
-
-    public void remove(int position) {
-        mTaskList.remove(position);
-        notifyItemRemoved(position);
-    }
-
     // Create new views (invoked by the layout manager)
     @Override
     public TaskAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -148,7 +138,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         public TextView taskPriorityTxtV;
         public TextView taskTagTxtV;
         public TextView taskDateTxtV;
-        public TextView mEmptyStateTextView;
 
         public View layout;
 
@@ -159,7 +148,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             taskTagTxtV = v.findViewById(R.id.single_row_tag);
             taskDateTxtV = v.findViewById(R.id.single_row_date);
             taskPriorityTxtV = v.findViewById(R.id.single_row_priority);
-            mEmptyStateTextView = v.findViewById(R.id.empty_view);
         }
     }
 }
