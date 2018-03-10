@@ -21,12 +21,13 @@ import java.util.Locale;
 public class UpdateTaskActivity extends AppCompatActivity {
 
     public RadioGroup myRadioGroup;
-    // Declare a member variable to keep track of a task's selected mPriority
+    //keep track of a task's selected mPriority
     private int mPriority;
     private EditText mNoteEditText;
     private EditText mTagEditText;
     private TextView mDateTextView;
     private Button mUpdateBtn;
+
     private TaskDBHelper dbHelper;
     private long receivedTaskId;
 
@@ -109,7 +110,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
             goBackHome();
         }
 
-        //create updated person
+        //create updated task
         Task updatedTask = new Task(note, mPriority, tag, date);
 
         //call dbhelper update
@@ -124,9 +125,9 @@ public class UpdateTaskActivity extends AppCompatActivity {
     private String getCurrentDate() {
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("LLL dd, yyyy HH:mm", Locale.getDefault());
+        SimpleDateFormat mDateFormat = new SimpleDateFormat("LLL dd, yyyy HH:mm", Locale.getDefault());
 
-        return mdformat.format(calendar.getTime());
+        return mDateFormat.format(calendar.getTime());
     }
 
     // customizable toast

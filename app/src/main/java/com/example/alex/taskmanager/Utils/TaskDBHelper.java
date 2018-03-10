@@ -143,10 +143,11 @@ public class TaskDBHelper extends SQLiteOpenHelper {
      **/
     public void updateTaskRecord(long personId, Context context, Task updatedTask) {
         SQLiteDatabase db = this.getWritableDatabase();
-        //you can use the constants above instead of typing the column names
-        db.execSQL("UPDATE  " + TABLE_NAME + " SET note ='" + updatedTask.getNote() + "', priority ='" + updatedTask.getPriority() +
-                "', tag ='" + updatedTask.getTag() + "', date ='" + updatedTask.getDate() +
 
-                "'  WHERE _id='" + personId + "'");
+        db.execSQL("UPDATE  " + TABLE_NAME + " SET note ='" + updatedTask.getNote()
+                + "', priority ='" + updatedTask.getPriority()
+                + "', tag ='" + updatedTask.getTag()
+                + "', date ='" + updatedTask.getDate()
+                + "'  WHERE _id='" + personId + "'");
     }
 }
