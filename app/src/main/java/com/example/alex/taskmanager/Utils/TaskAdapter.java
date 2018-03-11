@@ -24,8 +24,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private RecyclerView mRecyclerV;
 
     //constructor
-    public TaskAdapter(List<Task> myDataset, Context context, RecyclerView recyclerView) {
-        mTaskList = myDataset;
+    public TaskAdapter(List<Task> myDataSet, Context context, RecyclerView recyclerView) {
+        mTaskList = myDataSet;
         mContext = context;
         mRecyclerV = recyclerView;
     }
@@ -37,7 +37,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         View v = inflater.inflate(R.layout.single_row, parent, false);
-        // set the view's size, margins, paddings and layout parameters
+        // set the view's size, margins, padding and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -101,7 +101,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         mContext.startActivity(goToUpdate);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    // Return the size of your dataSet (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mTaskList.size();

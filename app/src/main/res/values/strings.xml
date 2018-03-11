@@ -14,6 +14,7 @@
     <string name="radio_medium_priority">medium</string>
     <string name="radio_high_priority">high</string>
     <string name="radio_urgent_priority">urgent</string>
+
     <string name="no_data_available">No data available. Use + sign to add a new task and the drop down menu as filter.</string>
 
 </resources>

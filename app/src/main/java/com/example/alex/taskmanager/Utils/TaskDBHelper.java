@@ -77,7 +77,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
                 //regular query
                 query = "SELECT  * FROM " + TABLE_NAME;
                 break;
-            case "Date":
+            case "    Date":
             case "Priority":
                 query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + filter + " DESC ";
                 break;

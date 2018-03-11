@@ -9,13 +9,13 @@
     <!-- Color for priority 1 -->
     <color name="lowPri">#18ab40</color>
 
-    <!-- Color for priority 3  -->
+    <!-- Color for priority 2  -->
     <color name="mediumPri">#d6b201</color>
 
-    <!-- Color for priority 4 -->
+    <!-- Color for priority 3 -->
     <color name="highPri">#e4930e</color>
 
-    <!-- Color for priority 5 -->
+    <!-- Color for priority 4 -->
     <color name="urgentPri">#b73827</color>
 
 </resources>

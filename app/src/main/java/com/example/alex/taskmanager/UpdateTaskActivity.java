@@ -113,7 +113,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
         //create updated task
         Task updatedTask = new Task(note, mPriority, tag, date);
 
-        //call dbhelper update
+        //call dbHelper update
         dbHelper.updateTaskRecord(receivedTaskId, this, updatedTask);
         toastMessage("item updated");
     }

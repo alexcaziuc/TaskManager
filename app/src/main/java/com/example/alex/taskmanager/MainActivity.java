@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 R.array.filterOptions, R.layout.custom_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -96,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 populateRecyclerView(filter);
             }
         });
-
 
         spinner.setAdapter(adapter);
         return true;

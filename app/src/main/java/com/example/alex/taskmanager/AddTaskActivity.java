@@ -32,7 +32,7 @@ public class AddTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        // Initialize to lowest mPriority by default (mPriority = 1)
+        // Initialize lowest mPriority by default (mPriority = 1)
         mPriority = 1;
 
         //init
@@ -79,7 +79,6 @@ public class AddTaskActivity extends AppCompatActivity {
         }
 
         //create new task
-        //Task task = new Task(note, priority, tag);
         Task task = new Task(note, mPriority, tag, date);
         dbHelper.saveNewTask(task);
         toastMessage("1 item added");
@@ -93,10 +92,9 @@ public class AddTaskActivity extends AppCompatActivity {
     private String getCurrentDate() {
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("LLL dd, yyyy HH:mm", Locale.getDefault());
+        SimpleDateFormat mDateFormat = new SimpleDateFormat("LLL dd, yyyy HH:mm", Locale.getDefault());
 
-        return mdformat.format(calendar.getTime());
-
+        return mDateFormat.format(calendar.getTime());
     }
 
     // customizable toast
