@@ -24,8 +24,6 @@ public class AddTaskActivity extends AppCompatActivity {
     private int mPriority;
     private EditText mNoteEditText;
     private EditText mTagEditText;
-    private Button mAddBtn;
-    private TaskDBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class AddTaskActivity extends AppCompatActivity {
         mNoteEditText = findViewById(R.id.add_task_note);
         mTagEditText = findViewById(R.id.add_task_tag);
 
-        mAddBtn = findViewById(R.id.addNewTaskButton);
+        Button mAddBtn = findViewById(R.id.addNewTaskButton);
 
         //listen to add button click
         mAddBtn.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +55,8 @@ public class AddTaskActivity extends AppCompatActivity {
         String note = mNoteEditText.getText().toString().trim();
         String tag = mTagEditText.getText().toString().trim();
         String date = getCurrentDate();
-        dbHelper = new TaskDBHelper(this);
+
+        TaskDBHelper dbHelper = new TaskDBHelper(this);
 
         int checkedRadioId = myRadioGroup.getCheckedRadioButtonId();
 

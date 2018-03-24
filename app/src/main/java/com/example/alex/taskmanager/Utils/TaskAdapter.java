@@ -21,13 +21,12 @@ import java.util.List;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private List<Task> mTaskList;
     private Context mContext;
-    private RecyclerView mRecyclerV;
 
     //constructor
     public TaskAdapter(List<Task> myDataSet, Context context, RecyclerView recyclerView) {
         mTaskList = myDataSet;
         mContext = context;
-        mRecyclerV = recyclerView;
+        RecyclerView mRecyclerV = recyclerView;
     }
 
     // Create new views (invoked by the layout manager)

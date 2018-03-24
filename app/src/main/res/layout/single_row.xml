@@ -37,6 +37,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="note: "
+                        android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="italic" />
 
@@ -64,6 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="priority: "
+                        android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="italic" />
 
@@ -88,6 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="tag: #"
+                        android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="italic" />
 

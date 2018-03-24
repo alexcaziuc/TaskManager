@@ -22,8 +22,6 @@ import com.example.alex.taskmanager.Utils.TaskDBHelper;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private TaskDBHelper dbHelper;
     private TaskAdapter adapter;
     private String filter = "";
     private TextView mEmptyStateTextView;
@@ -36,25 +34,24 @@ public class MainActivity extends AppCompatActivity {
         mEmptyStateTextView = findViewById(R.id.empty_view);
 
         //toolbar
-        Toolbar mainActToobar = findViewById(R.id.act_main_toolbar);
-        setSupportActionBar(mainActToobar);
-        getSupportActionBar().setTitle("Task Manager");
-        getSupportActionBar().setIcon(getDrawable(R.drawable.ic_action_logo));
+        Toolbar mainActToolbar = findViewById(R.id.act_main_toolbar);
+        setSupportActionBar(mainActToolbar);
+        getSupportActionBar().setTitle("All Tasks");
+        getSupportActionBar().setIcon(getDrawable(R.mipmap.simple_ic_launcher));
 
         //initialize the variables
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //populate recyclerView
         populateRecyclerView(filter);
-        adapter.notifyDataSetChanged();
     }
 
     private void populateRecyclerView(String filter) {
-        dbHelper = new TaskDBHelper(this);
+        TaskDBHelper dbHelper = new TaskDBHelper(this);
 
         if (dbHelper.taskList(filter).isEmpty()) {
             mRecyclerView.setVisibility(View.GONE);

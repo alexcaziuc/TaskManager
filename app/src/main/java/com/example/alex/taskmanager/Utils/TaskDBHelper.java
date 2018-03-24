@@ -45,7 +45,7 @@ public class TaskDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // you can implement here migration process
+        //update the table schema to the requested version.
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         this.onCreate(db);
     }
@@ -77,12 +77,13 @@ public class TaskDBHelper extends SQLiteOpenHelper {
                 //regular query
                 query = "SELECT  * FROM " + TABLE_NAME;
                 break;
-            case "    Date":
+            case "Date":
             case "Priority":
+                // if filter is Date or Priority filter descending
                 query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + filter + " DESC ";
                 break;
             default:
-                //filter results by filter option provided
+                //filter results by filter option which is provided
                 query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + filter;
                 break;
         }
